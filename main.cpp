@@ -21,20 +21,20 @@ public:
         cout << "X = " << this->x << "\tY = " << this->y << endl;
     }
     //Costructors:
-    Point(){
+    /*Point(){
         x = y = double();
         cout << "DefaultConstructor:\t" << this << endl;
-    }
-    Point(double x, double y){
+    }*/
+    Point(double x = 0, double y = 0){
         this->x  = x;
         this->y = y;
         cout << "Constructor with two parametrs:\t" << this << endl;
-    }
+    }/*
     Point(double x){
         this->x = x;
         this->y = double();
         cout << "Constructor with one parametr:\t" << this << endl;
-    }
+    }*/
     ~Point(){
         cout << "Destructor:\t" << this << endl;
     }
