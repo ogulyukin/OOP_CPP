@@ -1,4 +1,5 @@
 #include <iostream>
+#include "math.h"
 using namespace  std;
 //#define BASICS
 class Point{
@@ -20,21 +21,16 @@ public:
     void print(){
         cout << "X = " << this->x << "\tY = " << this->y << endl;
     }
+    double get_distance(double x, double y){
+        double result = sqrt(pow(this->get_x() - x,2)+pow(this->get_y() - y,2));
+        return result;
+    }
     //Costructors:
-    /*Point(){
-        x = y = double();
-        cout << "DefaultConstructor:\t" << this << endl;
-    }*/
     Point(double x = 0, double y = 0){
         this->x  = x;
         this->y = y;
-        cout << "Constructor with two parametrs:\t" << this << endl;
-    }/*
-    Point(double x){
-        this->x = x;
-        this->y = double();
-        cout << "Constructor with one parametr:\t" << this << endl;
-    }*/
+        cout << "Constructor:\t" << this << endl;
+    }
     ~Point(){
         cout << "Destructor:\t" << this << endl;
     }
@@ -47,12 +43,7 @@ int main() {
     B.print();
     Point C = 5;
     C.print();
-#ifdef BASICS
-    A.set_x(2);
-    A.set_y(5);
-    cout << A.get_x() << "\t" << A.get_y() << endl;
-    Point* pA = &A;
-    cout << pA->get_x() << "\t" <<  pA->get_y() << endl;
-#endif
+    cout << "The distance between the points is : " << A.get_distance(B.get_x(),B.get_y()) << endl;
+    //cout << "Checking : " << sqrt(2 * 2 + 5 * 5) << endl;
     return 0;
 }
