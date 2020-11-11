@@ -25,6 +25,14 @@ public:
         double result = sqrt(pow(this->get_x() - x,2)+pow(this->get_y() - y,2));
         return result;
     }
+    double get_distance_to_point(){
+        double x, y, result;
+        cout << "Enter point coordinates" << endl;
+        cout << "\tEnter x coordinate : "; cin >> x;
+        cout << "\tEnter y coordinate : "; cin >> y;
+        result = get_distance(x,y);
+        return result;
+    }
     //Costructors:
     Point(double x = 0, double y = 0){
         this->x  = x;
@@ -43,7 +51,9 @@ int main() {
     B.print();
     Point C = 5;
     C.print();
-    cout << "The distance between the points is : " << A.get_distance(B.get_x(),B.get_y()) << endl;
+    cout << "The distance between the points A and B is : " << A.get_distance(B.get_x(),B.get_y()) << endl;
     //cout << "Checking : " << sqrt(2 * 2 + 5 * 5) << endl;
+    cout << "The disctance form point B to point you'll now input is:" << endl;
+    cout << B.get_distance_to_point() << endl;
     return 0;
 }
