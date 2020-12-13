@@ -9,6 +9,20 @@ inline Fraction operator/(Fraction left, Fraction right);
 inline Fraction operator-(Fraction left, Fraction right);
 ostream& operator<<(ostream& os, const Fraction& obj);
 bool operator==(const Fraction& left, const Fraction& right);
+class HouseNumber{
+    int number;
+public:
+    int get_number() const{
+        return this->number;
+    }
+    void Print_House_number()const{
+        cout << number << endl;
+    }
+    HouseNumber(int number){
+        this->number = number;
+    }
+};
+
 class Fraction{
     int integer;
     int numerator;
@@ -146,11 +160,23 @@ public:
         integer--;
         return *this;
     }
+    //Type cast operator
+    explicit operator int(){
+        return this->to_proper().integer;
+    }
+    explicit operator double(){
+        to_proper();
+       return integer +(double)numerator / denomenator;
+    }
+    operator HouseNumber(){
+
+    }
 };
 //#define CONSRUCTORS_CHECK
 //#define ASSIGNMENT_CHECK
 //#define ARITHMETICKS_CHECK
 //#define INCREMENT_CHECK
+//#define COMPARISON_CHECK
 #define delimeter "\n--------------------------\n"
 int main() {
     setlocale(LC_ALL,"Russian");
@@ -204,6 +230,7 @@ int main() {
     (Fraction(2,4) - Fraction(1,4)).print_fraction();
     cout << "\n--------------------------------------------------\n";
 #endif
+#ifdef COMPARISON_CHECK
     //Fraction A(1,2);
     //cout << delimeter;
     //cout << A << endl;
@@ -211,7 +238,23 @@ int main() {
     Fraction A(4,1,2);
     Fraction B = A;
     cout << (A==B) << endl;
-
+#endif
+    /*
+    double a = 2.5;
+    cout  << (int)a << endl; //C like natation
+    cout  << int(a)<< endl; //C++like natation
+    int b = a;
+    cout << b << endl;
+    cout << typeid(2+3.5).name() << endl;
+    */
+     Fraction A = 5;
+    cout << A << endl;
+    Fraction B;
+    B = 8;
+    cout << B << endl;
+    Fraction C(2,1,2);
+    double d = (double)C;
+    cout << d << endl;
     return 0;
 }
 inline Fraction operator*(Fraction left, Fraction right){
