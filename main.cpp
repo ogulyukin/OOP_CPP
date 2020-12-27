@@ -16,30 +16,33 @@ public:
     char* get_str(){
         return str;
     }
-    explicit String(int size = 80){
-        this->size = size;
-        this->str = new char[size]{};
+    explicit String(int size = 80):size(size), str(new char[size]{})//Делегирование конструктора
+    {
+        //this->size = size;
+        //this->str = new char[size]{};
         cout << "Default Constructor\t" << this << endl;
     }
-    String(const char str[]){
-        this->size =  strlen(str)+1;
-        this->str = new char[size]{};
+    String(const char str[]):String(strlen(str)+1)//Делегирование конструктора
+    {
+        //this->size =  strlen(str)+1;
+        //this->str = new char[size]{};
         for (int i = 0; str[i]; i++){
             this->str[i] = str[i];
         }
         cout << "String Constructor\t" << this << endl;
     }
-    String(const String& other){
-        this->size =  other.size;
-        this->str = new char[size]{};
-        for (int i = 0; other.str[i]; i++){
-            this->str[i] = other.str[i];
-        }
+    String(const String& other):String(other.str)
+    {
+        //this->size =  other.size;
+        //this->str = new char[size]{};
+        //for (int i = 0; other.str[i]; i++){
+        //    this->str[i] = other.str[i];
+        //}
         cout << "Copy Constructor\t" << this << endl;
     }
-    String(String&& other){
-        this->size = other.size;
-        this->str = other.str;
+    String(String&& other):size(other.size),str(other.str){
+        //this->size = other.size;
+        //this->str = other.str;
         other.str = nullptr;
         cout << "Move constructor\t" << this << endl;
     }
@@ -108,6 +111,8 @@ String operator+(const String &left, const String &right){
  */
 //#define CONSTRUCTORS_CHECK
 //#define ASSIGMENT_CHECK
+//#define OPERATOR_PLUS_CHECK
+
 #define delimetr "\n_________________________________________\n"
 int main() {
     setlocale(LC_ALL, "");
@@ -129,9 +134,19 @@ int main() {
   str1.print();
 #endif
   String str1 = "Hello";
+    cout << delimetr;
   String str2 = "World";
+    cout << delimetr;
+    String str3 = str2;
+    cout << delimetr;
+    String str4;
+    str4 = str1 + str2;
   cout << str1 << endl;
   cout << str2 << endl;
+  cout << str3 << endl;
+  cout << str4 << endl;
+
+#ifdef OPERATOR_PLUS_CHECK
   str1.print();
   /*String name;
   cout << "Enter your name: "; cin >> name;
@@ -147,5 +162,7 @@ int main() {
   cout << (str1 + str2) << endl;
   cout << delimetr;
   cout << (str1 += str3) << endl;
+#endif
+
     return 0;
 }
