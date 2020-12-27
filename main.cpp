@@ -1,6 +1,8 @@
 #include <iostream>
 #include "string.h"
 using namespace std;
+class String;
+String operator+(const String &left, const String &right);
 class String{
     int size;
     char* str;
@@ -76,6 +78,9 @@ public:
     char& operator[](int i){
         return str[i];
     }
+    String& operator+=(const String& other){
+        return (*this = *this + other);
+    }
 };
 ostream& operator<<(ostream& ost, const String& str){
     return ost << str.get_str();
@@ -141,5 +146,6 @@ int main() {
   cout << delimetr;
   cout << (str1 + str2) << endl;
   cout << delimetr;
+  cout << (str1 += str3) << endl;
     return 0;
 }
