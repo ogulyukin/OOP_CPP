@@ -202,7 +202,7 @@ public:
             set_side_one(rand_value(100)/2);
             set_side_two(rand_value(100)/2);
             set_side_three(rand_value(100)/2);
-        }while(get_area() < 0 );
+        }while((side_one + side_two) < side_three && (side_two + side_three) < side_one);
     }
     Triangle(Color color, double side_one, double side_two, double side_three):Shape(color){
         set_side_one(side_one);
@@ -287,6 +287,8 @@ int main() {
     cout << "-----------------------------------------------" << endl;
     Triangle trig(blue);
     trig.draw();
+    Triangle trig01(blue, 10, 6, 8);
+    trig01.draw();
     cout << "-----------------------------------------------" << endl;
     Circle circl(yellow);
     circl.draw();
