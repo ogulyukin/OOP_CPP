@@ -31,6 +31,10 @@ protected:
                 cout << "\033[1;0m";
         }
     }
+    double rand_value(int value){
+        srand(time(0));
+        return rand() % value;
+    }
 public:
     virtual double get_area()const = 0;
     virtual double get_perimeter() const = 0;
@@ -55,6 +59,9 @@ public:
         side >= 0 ? this ->side = side: this->side = 0;
     }
     //Constructors
+    Square(Color color):Shape(color){
+        set_side(rand_value(100));
+    }
     Square(Color color, double side):Shape(color){
         set_side(side);
         cout << "Constructor:\t" << this << endl;
@@ -73,6 +80,8 @@ public:
         //HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
         //SetCosoleTextAttribute(hConsole, get_color());
         set_draw_color(get_color());
+        cout << "Площадь квадрата: " << get_area() << endl;
+        cout << "Периметр квадрата: " << get_perimeter() << endl << endl;
         for (int i = 0; i < side; i++){
             for (int j = 0; j < side; j++){
                 cout << "* ";
@@ -107,6 +116,8 @@ public:
     }
     virtual void draw(){
         set_draw_color(get_color());
+        cout << "Площадь прямоугольника: " << get_area() << endl;
+        cout << "Периметр прямоугольника: " << get_perimeter() << endl << endl;
         for (int i = 0; i < side_one; i++){
             for (int j = 0; j < side_two; j++){
                 cout << "* ";
@@ -114,6 +125,10 @@ public:
             cout << endl;
         }
         set_draw_color(100);
+    }
+    Rectangle(Color color): Shape(color){
+        set_side_one(rand_value(100));
+        set_side_two(rand_value(100));
     }
     Rectangle(Color color, double side_one, double side_two):Shape(color){
         set_side_one(side_one);
@@ -156,11 +171,12 @@ public:
     }
     virtual void draw(){
         set_draw_color(get_color());
+        cout << "Площадь треугольника: " << get_area() << endl;
+        cout << "Периметр треугольника: " << get_perimeter() << endl << endl;
         //Todo нарисовать произвольный треугольник... вот только как это сделать??? - А вот так!!!!
         double H = ( 2 * get_area() / side_one);
-        double half_side_one = sqrt(pow(get_side_two(),2) - pow(H,2)) * 10;
-        double half_side_two = sqrt(pow(get_side_three(),2) - pow(H,2)) * 10;
-        H *= 10;
+        double half_side_one = sqrt(pow(get_side_two(),2) - pow(H,2));
+        double half_side_two = sqrt(pow(get_side_three(),2) - pow(H,2));
         double index01 = 0;
         double index02 = 0;
         for (int i = 0; i < H; i++){
@@ -176,6 +192,13 @@ public:
         }
 
         set_draw_color(100);
+    }
+    Triangle(Color color):Shape(color){
+        do{
+            set_side_one(rand_value(100));
+            set_side_two(rand_value(100));
+            set_side_three(rand_value(100));
+        }while(get_area() <=0);
     }
     Triangle(Color color, double side_one, double side_two, double side_three):Shape(color){
         set_side_one(side_one);
@@ -205,6 +228,8 @@ public:
     virtual void draw(){
         set_draw_color(get_color());
         //todo WoW!! а теперь давай сделаем кружочек!!!
+        cout << "Площадь круга: " << get_area() << endl;
+        cout << "Длина окружности: " << get_perimeter() << endl << endl;
         int index01;
         for (int i = 0; i <= radius; i++){
             index01 = sqrt(pow(radius, 2) - pow(radius - i, 2));
@@ -237,6 +262,9 @@ public:
         }
         set_draw_color(100);
     }
+    Circle(Color color): Shape(color){
+        set_radius(rand_value(100));
+    }
     Circle(Color color, double radius):Shape(color){
         set_radius(radius);
         cout << "CircleConstructor" << this << endl;
@@ -246,20 +274,16 @@ public:
     }
 };
 int main() {
-    Square square(red,10);
-    cout << "Square:" << endl;
-    cout << "Perimeter: " << square.get_perimeter() << endl;
-    cout << "Area: " << square.get_area() << endl;
+    Square square(red);
     square.draw();
     cout << "-----------------------------------------------" << endl;
-    Rectangle rect(green, 4, 6);
+    Rectangle rect(green);
     rect.draw();
     cout << "-----------------------------------------------" << endl;
-    Triangle trig(blue, 5, 3, 4);
-    cout << trig.get_area() << endl;
+    Triangle trig(blue);
     trig.draw();
     cout << "-----------------------------------------------" << endl;
-    Circle circl(yellow, 20);
+    Circle circl(yellow);
     circl.draw();
     return 0;
 }
