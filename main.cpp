@@ -34,7 +34,7 @@ protected:
     double rand_value(int value){
         srand(time(0));
         system("sleep 1");
-        return rand() % value;
+        return rand() % (value-10)+20;
     }
 public:
     virtual double get_area()const = 0;
@@ -199,10 +199,10 @@ public:
     }
     Triangle(Color color):Shape(color){
         do{
-            set_side_one(rand_value(100)/2);
-            set_side_two(rand_value(100)/2);
-            set_side_three(rand_value(100)/2);
-        }while((side_one + side_two) < side_three && (side_two + side_three) < side_one);
+            set_side_one(rand_value(50));
+            set_side_two(rand_value(50));
+            set_side_three(rand_value(50));
+        }while((side_one + side_two) < side_three && (side_two + side_three) < side_one && (side_one + side_three < side_two));
     }
     Triangle(Color color, double side_one, double side_two, double side_three):Shape(color){
         set_side_one(side_one);
@@ -279,13 +279,14 @@ public:
     }
 };
 int main() {
+    srand(time(0));
     Square square(red);
     square.draw();
     cout << "-----------------------------------------------" << endl;
     Rectangle rect(green);
     rect.draw();
     cout << "-----------------------------------------------" << endl;
-    Triangle trig(blue);
+    Triangle trig(Color (rand()%5));
     trig.draw();
     Triangle trig01(blue, 10, 6, 8);
     trig01.draw();
