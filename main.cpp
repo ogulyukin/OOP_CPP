@@ -33,6 +33,7 @@ protected:
     }
     double rand_value(int value){
         srand(time(0));
+        system("sleep 1");
         return rand() % value;
     }
 public:
@@ -60,7 +61,7 @@ public:
     }
     //Constructors
     Square(Color color):Shape(color){
-        set_side(rand_value(100));
+        set_side(rand_value(100)/2);
     }
     Square(Color color, double side):Shape(color){
         set_side(side);
@@ -81,7 +82,8 @@ public:
         //SetCosoleTextAttribute(hConsole, get_color());
         set_draw_color(get_color());
         cout << "Площадь квадрата: " << get_area() << endl;
-        cout << "Периметр квадрата: " << get_perimeter() << endl << endl;
+        cout << "Периметр квадрата: " << get_perimeter() << endl;
+        cout << "Стороны квадрата: " << side << endl << endl;
         for (int i = 0; i < side; i++){
             for (int j = 0; j < side; j++){
                 cout << "* ";
@@ -117,7 +119,8 @@ public:
     virtual void draw(){
         set_draw_color(get_color());
         cout << "Площадь прямоугольника: " << get_area() << endl;
-        cout << "Периметр прямоугольника: " << get_perimeter() << endl << endl;
+        cout << "Периметр прямоугольника: " << get_perimeter() << endl;
+        cout << "Стороны прямоугольника: " << side_one << "\t" << side_two << endl << endl;
         for (int i = 0; i < side_one; i++){
             for (int j = 0; j < side_two; j++){
                 cout << "* ";
@@ -127,8 +130,8 @@ public:
         set_draw_color(100);
     }
     Rectangle(Color color): Shape(color){
-        set_side_one(rand_value(100));
-        set_side_two(rand_value(100));
+        set_side_one(rand_value(100)/2);
+        set_side_two(rand_value(100)/2);
     }
     Rectangle(Color color, double side_one, double side_two):Shape(color){
         set_side_one(side_one);
@@ -172,7 +175,8 @@ public:
     virtual void draw(){
         set_draw_color(get_color());
         cout << "Площадь треугольника: " << get_area() << endl;
-        cout << "Периметр треугольника: " << get_perimeter() << endl << endl;
+        cout << "Периметр треугольника: " << get_perimeter() << endl;
+        cout << "Стороны треугольника: " << side_one << "\t" << side_two << "\t" << side_three << endl << endl;
         //Todo нарисовать произвольный треугольник... вот только как это сделать??? - А вот так!!!!
         double H = ( 2 * get_area() / side_one);
         double half_side_one = sqrt(pow(get_side_two(),2) - pow(H,2));
@@ -195,10 +199,10 @@ public:
     }
     Triangle(Color color):Shape(color){
         do{
-            set_side_one(rand_value(100));
-            set_side_two(rand_value(100));
-            set_side_three(rand_value(100));
-        }while(get_area() <=0);
+            set_side_one(rand_value(100)/2);
+            set_side_two(rand_value(100)/2);
+            set_side_three(rand_value(100)/2);
+        }while(get_area() < 0 );
     }
     Triangle(Color color, double side_one, double side_two, double side_three):Shape(color){
         set_side_one(side_one);
@@ -229,7 +233,8 @@ public:
         set_draw_color(get_color());
         //todo WoW!! а теперь давай сделаем кружочек!!!
         cout << "Площадь круга: " << get_area() << endl;
-        cout << "Длина окружности: " << get_perimeter() << endl << endl;
+        cout << "Длина окружности: " << get_perimeter() << endl;
+        cout << "Радиус: " << radius << endl << endl;
         int index01;
         for (int i = 0; i <= radius; i++){
             index01 = sqrt(pow(radius, 2) - pow(radius - i, 2));
@@ -263,7 +268,7 @@ public:
         set_draw_color(100);
     }
     Circle(Color color): Shape(color){
-        set_radius(rand_value(100));
+        set_radius(rand_value(100)/2);
     }
     Circle(Color color, double radius):Shape(color){
         set_radius(radius);
