@@ -1,7 +1,6 @@
 //
 // Created by oleg on 20.02.2021.
 //
-#include <iostream>
 #include "Element.h"
 using namespace std;
 Element* Element::get_pNext(){
@@ -11,8 +10,11 @@ int Element::get_Data()const{
     return Data;
 }
 Element::Element(int Data, Element* pNext): Data(Data), pNext(pNext){
-    cout << "EConstructor:\t" << this << endl;
+    count++;
+    //cout << "EConstructor:\t" << this << endl;
 }
 Element::~Element(){
-    cout << "EDestructor:\t" << this << endl;
+    count--;
+    //cout << "EDestructor:\t" << this << endl;
 }
+int Element::count = 0;

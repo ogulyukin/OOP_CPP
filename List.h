@@ -4,18 +4,25 @@
 #include <initializer_list>
 #include <iostream>
 #include <ostream>
+#include <exception>
 #include "Element.h"
 #define tab "\t"
 using namespace std;
 class List{
     Element* Head; //на начальный элемент списка
+    int size;
 public:
     Element* get_Head();
+    int get_list_size()const;
+    Iterator begin();
+    Iterator begin() const;
+    Iterator end();
+    Iterator end() const;
     List();
-    List(int count);
+    explicit List(int count);
     List(const initializer_list<int> &list);
     List(const List &list);
-    List(List &&list);
+    List(List&& list);
     ~List();
     //Добавление элемента
     void push_front(int Data);
@@ -31,10 +38,10 @@ public:
     void erase(int index);
     void erase_elements(Element *element, Element *element1);
     void copy_elements(Element* element);
-    void erase_all();
     List* operator=(const List &list);
-    List* operator=(List &&list);
-    Element* operator[](int index);
-    List operator+(const List &other);
+    List& operator=(List&& list);
+    int& operator[](int index);
+
 };
 ostream& operator<<(ostream &is, List &list);
+List operator+(const List &left, const List &right);

@@ -9,13 +9,38 @@ int main() {
     setlocale(LC_ALL, "");
     srand(time(0));
     int n;
-    cout << "Введите размер списка: "; cin >> n;
-    List list;
+    //cout << "Введите размер списка: "; cin >> n;
+    /*List list;
     for (int i = 0; i < n; i++) {
         list.push_front(rand() % 100);
         system("sleep 1");
     }
     list.print();
+    List list2(n);
+    list2.print();
+    list2[2] = rand()%100;
+    cout << list2[2] << endl;
+    List list3;
+    list3 = list2;
+    list3.print();*/
+    List list4 = {3,23,8,1,4};
+    //list4.print();
+    for (int i : list4){
+        cout << i << tab;
+    }
+    cout << endl;
+    List list3 = {3,55,89};
+    for(Iterator it = list3.begin(); it != list3.end(); it++)
+        cout << *it << tab;
+    cout << endl;
+    List list5 = {1,1,1};
+    cout << "____________________________________" << endl;
+    List list6;
+    list6 = list4 + list3 + list5;
+    //list5 = list5;
+    list6.print();
+    cout << "____________________________________" << endl;
+
     /*
     cout << "Push_back----------------------------------" << endl;
     //list.push_back(101);
@@ -46,7 +71,7 @@ int main() {
 
     cout << "Erase_all---------------------------------" << endl;
     list.erase_all();
-    list.print();*/
+    list.print();
     cout << "Assigned_recursion---------------------------------" << endl;
     List list2;
     list2 = list;
@@ -62,6 +87,6 @@ int main() {
     cout << list4;
     //for(int i:list4)
     //    cout << i << tab;
-    //cout << endl;
+    //cout << endl;*/
     return 0;
 }
