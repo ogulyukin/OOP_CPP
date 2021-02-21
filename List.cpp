@@ -110,7 +110,9 @@ List::~List(){
     void List::pop_front(){
         if(Head->pNext == nullptr)
             return;
+        Element* temp = Head;
         Head = Head->pNext;
+        delete temp;
     }
     void List::pop_back(){
         Element* temp = Head;
